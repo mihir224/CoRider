@@ -10,23 +10,27 @@ function Chat(){
     const [chat,setChat]=useState({});
     const [date,setDate]=useState('')
     const [isLoading,setIsLoading]=useState(false);
+    const [err,setErr]=useState(false);
     useEffect(()=>{
         setIsLoading(true);
         const fetchChat=async()=>{
             try{
-                const chatData=await axios.get('https://3.111.128.67/assignment/chat?page=0');
+                const chatData=await axios.get('http://3.111.128.67/assignment/chat?page=0');
                 setIsLoading(false);
                 setChat(chatData.data);
                 setDate(chatData.data.chats[0]?.time.split(" ")[0]);
             }catch(err){
                 console.log(err);
                 setIsLoading(false);
+                setErr(true);
             }
         }
         fetchChat();
     },[])
     console.log(chat)
-    
+    if(err){
+        return <h2>Couldn't load chat. Try again.</h2>
+    }
     return isLoading?<h1>Loading...</h1>:(
         <div id='chat'>
         <div id='chat-header'>
