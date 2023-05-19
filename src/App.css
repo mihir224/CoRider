@@ -1,7 +1,8 @@
 .App{
-  background-color: red;
+  background-color:#f5f2eadc;
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
+  color:rgba(0, 0, 0, 0.9);
 }
