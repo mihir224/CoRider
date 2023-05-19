@@ -15,7 +15,7 @@ function Chat(){
         setIsLoading(true);
         const fetchChat=async()=>{
             try{
-                const chatData=await axios.get('https://3.111.128.67/assignment/chat?page=0');
+                const chatData=await axios.get('http://3.111.128.67/assignment/chat?page=0');
                 setIsLoading(false);
                 setChat(chatData.data);
                 setDate(chatData.data.chats[0]?.time.split(" ")[0]);
