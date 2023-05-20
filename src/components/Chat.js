@@ -1,4 +1,4 @@
-import React, {useEffect,useState} from 'react';
+import React, {useEffect,useState,useRef} from 'react';
 import axios from 'axios';
 import '../styles/Chat.css';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
@@ -10,12 +10,15 @@ function Chat(){
     const [chat,setChat]=useState({});
     const [date,setDate]=useState('')
     const [isLoading,setIsLoading]=useState(false);
+    const [page,setPage]=useState(0);
     const [err,setErr]=useState(false);
+    const [reachedBottom,setReachedBottom]=useState(false);
+    const chatRef=useRef(null);
     useEffect(()=>{
         setIsLoading(true);
         const fetchChat=async()=>{
             try{
-                const chatData=await axios.get('https://3.111.128.67/assignment/chat?page=0');
+                const chatData=await axios.get(`http://3.111.128.67/assignment/chat?page=${page}`);
                 setIsLoading(false);
                 setChat(chatData.data);
                 setDate(chatData.data.chats[0]?.time.split(" ")[0]);
@@ -26,8 +29,32 @@ function Chat(){
             }
         }
         fetchChat();
-    },[])
-    console.log(chat)
+    },[page])
+    useEffect(()=>{
+        const chatBox=chatRef.current;
+        const handleScroll=(()=>{
+            setReachedBottom(chatBox.scrollHeight-chatBox.scrollTop===chatBox.clientHeight)
+        })
+        if(chatBox){
+            chatBox.addEventListener('scroll',handleScroll);
+        }
+       
+        return ()=>{    //to remove event listener when component unmounts
+            if(chatBox){
+                chatBox.removeEventListener('scroll',handleScroll);
+            }
+        }
+        
+    },[chatRef.current])
+    useEffect(() => {
+        if (reachedBottom && !isLoading) {
+          setTimeout(loadMore,700);
+        }
+      }, [reachedBottom,isLoading]);
+    function loadMore(){
+        setPage((prev)=>prev+1);
+        setReachedBottom(false);
+    }
     if(err){
         return <h2>Couldn't load chat. Try again.</h2>
     }
@@ -40,7 +67,7 @@ function Chat(){
             {chat.to&&<p><span>To</span> {chat.to}</p>}
         </div>
         </div>
-        <div id='chat-box'>
+        <div id='chat-box' ref={chatRef}>
         {date&&<p id='date' style={{color:'black'}}><span>{format(new Date(date),'do MMMM yyyy')}</span></p>}
         {chat.chats?.map((text)=>{
             if(text.sender.self){
@@ -57,9 +84,10 @@ function Chat(){
                     )
             }
         })}
+        {reachedBottom&&<h3 style={{textAlign:'center'}}>Loading...</h3>}
         </div>
         <div id='chat-footer'>
-            <input type='text' placeholder='Reply to @MihirSaini'></input>
+            <input type='text' placeholder='Reply to @Mihir Saini'></input>
             <div>
             <AttachFileOutlinedIcon className='footer-icon'/>
             <SendOutlinedIcon className='footer-icon'/>
