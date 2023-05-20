@@ -3,12 +3,14 @@
     height: 100vh;
     background-color:#f5f2ea;
     border-radius: 20px;
-    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.2);
-
+    box-shadow: 0px 10px 5px rgba(0, 0, 0, 0.2);
+  
 }
 #chat-header{
-    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.05);
     padding:10px; 
+    border-top-right-radius: inherit;
+    border-top-left-radius: inherit;
 }
 #chat-header>h2{
     margin:0;
@@ -28,23 +30,23 @@
     opacity: 0.8;
 }
 #chat-box{
-    max-height: 78.5vh;
+    max-height: 78vh;
     display: flex;
     overflow-y: scroll;
     flex-direction: column;
 }
 #date{
     text-align: center;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.7);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.5);
     line-height: 0em;
-    margin:1.5em 1.5em 1em 1.5em;
+    margin:1.5em 1.1em 1em 1.1em;
  }
 #date>span{
     background:#f5f2ea ;
     padding:0 10px; 
-    color:rgba(0, 0, 0, 0.7);
+    color:rgba(0, 0, 0, 0.6);
     font-weight: 500;
-    font-size: 15px;
+    font-size: 14px;
 
 }
 .text-box{
@@ -62,18 +64,18 @@
     background-color: #0084ff;
     align-self: flex-end;
     color: white;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border-bottom-left-radius: 10px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
     margin:0.5em 0.8em;
 }
 #receiver{
     background-color: white;
     color:rgba(0, 0, 0, 0.8);
     align-self: flex-start;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
 }
 .text-img{
     height: 30px;
@@ -82,17 +84,18 @@
     border-radius: 15px;
 }
 #chat-footer{
+  
     display:flex;
     justify-content:space-around;
-    padding:10px;
+    padding:13px;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
-    box-shadow: 0px -5px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px -5px 5px rgba(0, 0, 0, 0.05);
 }
 #chat-footer>input{
     width: 70%;
     border-radius: 6px;
-
+  
     padding:0 5px;
     font-family: inherit;
     border: 1px solid rgba(0, 0, 0, 0.199);
