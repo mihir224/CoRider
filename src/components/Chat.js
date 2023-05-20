@@ -18,7 +18,7 @@ function Chat(){
         setIsLoading(true);
         const fetchChat=async()=>{
             try{
-                const chatData=await axios.get(`http://3.111.128.67/assignment/chat?page=${page}`);
+                const chatData=await axios.get(`https://3.111.128.67/assignment/chat?page=${page}`);
                 setIsLoading(false);
                 setChat(chatData.data);
                 setDate(chatData.data.chats[0]?.time.split(" ")[0]);
@@ -84,7 +84,7 @@ function Chat(){
                     )
             }
         })}
-        {reachedBottom&&<h3 style={{textAlign:'center'}}>Loading...</h3>}
+        {reachedBottom&&<p style={{textAlign:'center'}}>Loading...</p>}
         </div>
         <div id='chat-footer'>
             <input type='text' placeholder='Reply to @Mihir Saini'></input>
